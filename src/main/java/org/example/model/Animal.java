@@ -28,33 +28,8 @@ public sealed class Animal permits Bird,Dog,Cat {
         this.age = age;
         this.color = color;
         this.adopted = adopted;
-        listOfAllAnimals.add(this);
     }
 
-    // List of all animals who were or is in the shelter
-    public static List<Animal> listOfAllAnimals = new ArrayList<>();
-
-    // Creating a list for specific Animal searching Animal by species
-    public static List<Animal> searchAnimalBySpecies(String species) {
-        List<Animal> specificSpeciesList = new ArrayList<>();
-        for(Animal animal : listOfAllAnimals) {
-            if(animal.getSpecies().toLowerCase().equals(species.toLowerCase())){
-                specificSpeciesList.add(animal);
-            }
-        }
-        return specificSpeciesList;
-    }
-
-    // List of all the animals who are currently in the shelter and can be adopted
-    public static List<Animal> currentlyAvailableAnimals() {
-        List<Animal> currentlyInShelter = new ArrayList<>();
-        for(Animal animal : listOfAllAnimals) {
-            if(!animal.adopted) {
-                currentlyInShelter.add(animal);
-            }
-        }
-        return currentlyInShelter;
-    }
 
     // Edited toString() method for all the animals in the shelter
     @Override
