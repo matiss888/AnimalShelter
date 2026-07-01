@@ -1,15 +1,11 @@
 package org.example.model;
 
-
 import lombok.Data;
-
-import java.util.ArrayList;
-import java.util.List;
 
 // Making getters and setters with Lombok's @Data annotation
 
 @Data
-public sealed class Animal permits Bird,Dog,Cat {
+public sealed class Animal permits Bird, Dog, Cat {
 
     // Variable fields for animal
     private final int id;
@@ -17,17 +13,17 @@ public sealed class Animal permits Bird,Dog,Cat {
     private String name;
     private int age;
     private final String color;
-    private boolean adopted;
+    private AdoptionStatus adoptionStatus;
 
     // Animal Constructor which adds newly created Animal inside the list of Animals in shelter
     // and also gives animal a unique ID.
-    public Animal (String species, String name, int age, String color, boolean adopted) {
+    public Animal (String species, String name, int age, String color, AdoptionStatus adoptionStatus) {
         this.id = AnimalId.getAnimalId();
         this.species = species;
         this.name = name;
         this.age = age;
         this.color = color;
-        this.adopted = adopted;
+        this.adoptionStatus = adoptionStatus;
     }
 
 
@@ -37,7 +33,8 @@ public sealed class Animal permits Bird,Dog,Cat {
         return  "\nID: " + id +
                 ", species: " + species +
                 ", name: " + name +
+                ", age: " + age +
                 ", color: " + color +
-                ", adopted: " + adopted;
+                ", adoption status: " + adoptionStatus;
     }
 }

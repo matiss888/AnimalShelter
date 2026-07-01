@@ -1,15 +1,15 @@
 package org.example.model;
 
 public final class Cat extends Animal {
-    public Cat (String name, int age, String color, boolean adopted) {
-        super("Cat", name, age, color, adopted);
+    public Cat (String name, int age, String color, AdoptionStatus adoptionStatus) {
+        super("Cat", name, age, color, adoptionStatus);
     }
 
     public Cat(String name, int age, String color) {
-        this(name,age,color,false);
+        this(name,age,color,AdoptionStatus.AVAILABLE);
     }
 
-    public Cat(String name,int age, boolean adopted) {
-        this(name, age,"Brown",adopted);
+    public Cat(String name,int age, AdoptionStatus adoptionStatus) {
+        this(name, age,"Brown", adoptionStatus);
     }
 }

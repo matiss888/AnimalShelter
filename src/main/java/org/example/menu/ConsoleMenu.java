@@ -1,12 +1,10 @@
 package org.example.menu;
 
-import org.example.model.Animal;
-import org.example.model.Bird;
-import org.example.model.Cat;
-import org.example.model.Dog;
+import org.example.model.*;
 import org.example.shelter.Shelter;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class ConsoleMenu {
@@ -38,19 +36,19 @@ public class ConsoleMenu {
 
             int usersChoice = Integer.parseInt(scanner.nextLine());
 
-            if (usersChoice == MenuOption.addAnimal) {
+            if (usersChoice == MenuOption.ADD_ANIMAL) {
                 System.out.println("Adding the new animal: ");
                 addAnimal();
-            } else if (usersChoice == MenuOption.listAllAnimals) {
+            } else if (usersChoice == MenuOption.LIST_ALL_ANIMALS) {
                 System.out.println("All animals in the shelter: ");
                 listAllAnimals();
-            } else if (usersChoice == MenuOption.searchBySpecies) {
+            } else if (usersChoice == MenuOption.SEARCH_BY_SPECIES) {
                 System.out.println("Searching by species: ");
                 searchBySpecies();
-            } else if (usersChoice == MenuOption.markAsAdopted) {
+            } else if (usersChoice == MenuOption.MARK_AS_ADOPTED) {
                 System.out.println("Changing animal's status to adopted: ");
                 markAsAdopted();
-            } else if (usersChoice == MenuOption.showAvailableAnimals) {
+            } else if (usersChoice == MenuOption.SHOW_AVAILABLE_ANIMALS) {
                 System.out.println("All available animals in shelter: ");
                 showAvailableAnimals();
             } else {
@@ -76,11 +74,11 @@ public class ConsoleMenu {
 
 
         if (species.equalsIgnoreCase("bird")) {
-            shelter.addAnimalToShelter(new Bird(name, age, color, false));
+            shelter.addAnimalToShelter(new Bird(name, age, color, AdoptionStatus.AVAILABLE));
         } else if (species.equalsIgnoreCase("dog")) {
-            shelter.addAnimalToShelter(new Dog(name, age, color, false));
+            shelter.addAnimalToShelter(new Dog(name, age, color, AdoptionStatus.AVAILABLE));
         } else if (species.equalsIgnoreCase("cat")) {
-            shelter.addAnimalToShelter(new Cat(name, age, color, false));
+            shelter.addAnimalToShelter(new Cat(name, age, color, AdoptionStatus.AVAILABLE));
         }
     }
 
@@ -105,14 +103,12 @@ public class ConsoleMenu {
         System.out.print("Enter the ID of the animal to mark as adopted: ");
         int id = Integer.parseInt(scanner.nextLine());
 
-        for (Animal animal : shelter.getAllTheAnimalsFromShelter()) {
-            if (animal.getId() == id) {
-                animal.setAdopted(true);
-                System.out.println(animal.getName() + " has been marked as adopted!");
-                return;
-            }
+        Optional<Animal> adoptedAnimal = shelter.markAnimalAsAdopted(id);
+        if (adoptedAnimal.isPresent()) {
+            System.out.println(adoptedAnimal.get().getName() + " has been marked as adopted!");
+        } else {
+            System.out.println("Did not find an animal with this ID: " + id);
         }
-        System.out.println("Did not find an animal with this ID: " + id);
     }
 
     //Shows animal who are currently in the shelter

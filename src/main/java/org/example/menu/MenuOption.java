@@ -1,13 +1,11 @@
 package org.example.menu;
 
-import java.util.Scanner;
-
 public class MenuOption {
 
-    public static int addAnimal = 1;
-    public static int listAllAnimals = 2;
-    public static int searchBySpecies = 3;
-    public static int markAsAdopted = 4;
-    public static int showAvailableAnimals = 5;
+    public static final int ADD_ANIMAL = 1;
+    public static final int LIST_ALL_ANIMALS = 2;
+    public static final int SEARCH_BY_SPECIES = 3;
+    public static final int MARK_AS_ADOPTED = 4;
+    public static final int SHOW_AVAILABLE_ANIMALS = 5;
 
 }
